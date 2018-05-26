@@ -230,11 +230,7 @@ char * adiost_build_dimension_string(struct adios_var_struct *v, int * ndims) {
             sprintf(dims, "%s%c%s", dims, delimiter, tmp->dimension.attr->name);
         // just 0.
         } else {
-#if defined(__clang__)
-            sprintf(dims, "%s%c%llu", dims, delimiter, tmp->dimension.rank);
-#else
-            sprintf(dims, "%s%c%lu", dims, delimiter, tmp->dimension.rank);
-#endif
+            sprintf(dims, "%s%c0", dims, delimiter);
         }
         // just a regular old number? Get its value.
         if (tmp->global_dimension.rank > 0) {
@@ -251,11 +247,7 @@ char * adiost_build_dimension_string(struct adios_var_struct *v, int * ndims) {
             sprintf(global_dims, "%s%c%s", global_dims, delimiter, tmp->global_dimension.attr->name);
         // just 0.
         } else {
-#if defined(__clang__)
-            sprintf(global_dims, "%s%c%llu", global_dims, delimiter, tmp->global_dimension.rank);
-#else
-            sprintf(global_dims, "%s%c%lu", global_dims, delimiter, tmp->global_dimension.rank);
-#endif
+            sprintf(global_dims, "%s%c0", global_dims, delimiter);
         }
         // just a regular old number? Get its value.
         if (tmp->local_offset.rank > 0) {
@@ -272,11 +264,7 @@ char * adiost_build_dimension_string(struct adios_var_struct *v, int * ndims) {
             sprintf(local_offsets, "%s%c%s", local_offsets, delimiter, tmp->local_offset.attr->name);
         // just 0.
         } else {
-#if defined(__clang__)
-            sprintf(local_offsets, "%s%c%llu", local_offsets, delimiter, tmp->local_offset.rank);
-#else
-            sprintf(local_offsets, "%s%c%lu", local_offsets, delimiter, tmp->local_offset.rank);
-#endif
+            sprintf(local_offsets, "%s%c0", local_offsets, delimiter);
         }
         // move on to the next dimension?
         delimiter = ',';
