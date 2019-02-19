@@ -181,7 +181,7 @@ int common_adios_open(int64_t *fd_p, const char *group_name, const char *name,
                 file_mode);
 
     *fd_p = 0;
-
+    ADIOST_CALLBACK_EXIT(adiost_event_open, *fd_p, group_name, name, file_mode, comm);
     return adios_errno;
   }
 
@@ -421,6 +421,7 @@ int common_adios_open(int64_t *fd_p, const char *group_name, const char *name,
                         " bytes for buffered output "
                         "of group %s in adios_open(). Output will fail.\n",
                         fd->buffer_size, g->name);
+            ADIOST_CALLBACK_EXIT(adiost_event_open, *fd_p, group_name, name, file_mode, comm);
             return adios_errno;
           }
         }
